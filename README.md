@@ -1,3 +1,7 @@
+> **Fork experiment:** [Xbox Nano Cloud Connect in iOS Safari](experiments/cloud-connect/README.md).
+> This branch includes a reversible userscript test for `play.xbox.com`; it is
+> not a completed Better xCloud port or a physically verified controller fix.
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/redphx/better-xcloud/refs/heads/typescript/resources/logos/better-xcloud.png" width="256"/>  
     <h1>Better xCloud</h1>
