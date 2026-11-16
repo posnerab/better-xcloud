@@ -7,7 +7,31 @@ xCloud port or a compatibility guarantee for every iOS version. The script asks
 Xbox to enable its existing Cloud Connect feature; Xbox still decides account,
 accessory and session eligibility.
 
-## Try it on iPhone
+## Shortcut installation on another iPhone or iPad
+
+[Download the signed Xbox Cloud Connect Shortcut](https://xbox-cloud-connect-download.unitedcookie.chatgpt.site/).
+The download page is private to its owner; sign in if prompted.
+
+1. Download and open `Xbox-Cloud-Connect.shortcut`, then add it to Shortcuts.
+2. Open <https://play.xbox.com/> in **Safari** and sign in with the Nano's Xbox account.
+3. From Safari's **Share** menu, run **Xbox Cloud Connect** and choose
+   **Enable Cloud Connect**. Allow JavaScript on the page if prompted.
+4. Return to Safari and reload. Open Xbox's controller icon and connect the Nano.
+5. Use **Share > Add to Home Screen**, then launch that Xbox app to play.
+
+No Userscripts extension is required for this route. The Shortcut also offers
+**Check settings** and **Restore previous settings**. Run those from Safari's
+Share menu too; reload after restoration. It changes Safari's configuration,
+not CloudGear's configuration. Changes to an existing Home Screen app's separate
+storage are not verified.
+
+The signed file was produced with Apple's `shortcuts sign --mode anyone`.
+Eight isolated WebKit checks passed for workflow structure, JavaScript execution,
+failure handling and restoration compatibility with the userscript. Import and
+Share-menu execution on a physical iPhone/iPad remain unverified. The owner's
+successful gameplay report below used the original userscript route.
+
+## Original userscript installation on iPhone
 
 1. Keep the Nano configured for Wi-Fi Cloud Connect with the Xbox account
    already used successfully on PC.
@@ -94,3 +118,22 @@ contexts with mocked Xbox HTML; they validate cookie changes, restoration and
 failure handling, not live Xbox compatibility or physical iPhone behavior.
 Publish this experiment by pushing the `safari-cloud-connect` branch. The raw
 GitHub script is the install artifact; no server deployment is required.
+
+### Rebuild the Shortcut
+
+Generate artifacts outside the Git checkout, then sign on macOS:
+
+```sh
+python3 experiments/cloud-connect/build_shortcut.py /tmp/cloud-connect-shortcut
+shortcuts sign --mode anyone \
+  --input '/tmp/cloud-connect-shortcut/Xbox Cloud Connect.unsigned.shortcut' \
+  --output /tmp/cloud-connect-shortcut/Xbox-Cloud-Connect.shortcut
+PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs node experiments/cloud-connect/test-shortcut.mjs
+```
+
+The builder reuses the userscript's cookie and restore logic, removing reloads
+so Shortcuts can receive its completion result before navigation. It performs
+no network requests and contains no credentials or account-specific data.
+Publish the signed file through the existing private download Site, preserving
+the userscript downloads and current audience. Signing validates packaging;
+browser tests do not establish physical-device Shortcut compatibility.
