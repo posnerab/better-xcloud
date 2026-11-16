@@ -1,9 +1,11 @@
 # Xbox Nano Cloud Connect in Safari: experimental test
 
-This fork's first milestone is Nano Wi-Fi Cloud Connect in iOS Safari. A PWA
-and a full Better xCloud port are separate work. This test is **not a verified
-iOS fix**. It asks the Xbox site to enable its existing Cloud Connect feature;
-Xbox still decides account, accessory and session eligibility.
+The owner confirmed Nano connection and page controls in iPhone Safari, then
+working gameplay after adding the Xbox page to the Home Screen as a PWA.
+This is a successful physical-device report for this setup, not a full Better
+xCloud port or a compatibility guarantee for every iOS version. The script asks
+Xbox to enable its existing Cloud Connect feature; Xbox still decides account,
+accessory and session eligibility.
 
 ## Try it on iPhone
 
@@ -22,6 +24,10 @@ Xbox still decides account, accessory and session eligibility.
    If offered, choose **Use here**. Test actual button and stick input in a game
    with the Nano in Wi-Fi mode and no Bluetooth connection to the iPhone.
    **Hide** dismisses the test panel for the current page.
+7. For the confirmed gameplay setup, add the enabled Xbox page to the iPhone
+   Home Screen using Safari's Share menu, then launch that Home Screen app.
+   Enable the switches in Safari first; the userscript does not need to run
+   inside the PWA for the owner's reported result.
 
 Report separately: whether the option appears, whether the Nano is listed,
 whether connection succeeds, and whether game input works. Include the iOS
@@ -43,6 +49,14 @@ configuration URL parameters and externally changed test switches stop the write
 instead of guessing. Other cookies and browser storage are not modified.
 
 ## Evidence and limits
+
+Owner verification, 2026-11-15: the Nano connected and controlled the page in
+Safari. In response to a request to test game input in Wi-Fi Cloud Connect mode
+with Bluetooth disconnected from the iPhone, the owner confirmed that gameplay
+worked after adding the page as a Home Screen PWA. This is owner-observed evidence,
+not an instrumented controller/session trace. The exact iOS version, game title,
+cold-launch persistence and PWA rollback have not been recorded. Do not assume
+that later Safari cookie changes automatically update an already installed PWA.
 
 Inspected on 2026-11-15:
 
